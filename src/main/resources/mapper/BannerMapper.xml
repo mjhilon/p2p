@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.p2p.manger.system.service.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.xdl.p2p.manger.system.entity.Banner">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="bannerType" jdbcType="BIGINT" property="bannertype" />
+    <result column="bannerTitle" jdbcType="VARCHAR" property="bannertitle" />
+    <result column="bannerimg" jdbcType="VARCHAR" property="bannerimg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_use" jdbcType="INTEGER" property="isUse" />
+    <result column="terminal_type" jdbcType="INTEGER" property="terminalType" />
+    <result column="dr" jdbcType="INTEGER" property="dr" />
+    <result column="bannerUrl" jdbcType="VARCHAR" property="bannerurl" />
+    <result column="bannerno" jdbcType="INTEGER" property="bannerno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bannerType, bannerTitle, bannerimg, create_time, is_use, terminal_type, dr, bannerUrl, 
+    bannerno
+  </sql>
+  <select id="selectByExample" parameterType="com.xdl.p2p.manger.system.entity.BannerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from p2p_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p2p_banner
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p2p_banner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xdl.p2p.manger.system.entity.BannerExample">
+    delete from p2p_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xdl.p2p.manger.system.entity.Banner">
+    insert into p2p_banner (id, bannerType, bannerTitle, 
+      bannerimg, create_time, is_use, 
+      terminal_type, dr, bannerUrl, 
+      bannerno)
+    values (#{id,jdbcType=BIGINT}, #{bannertype,jdbcType=BIGINT}, #{bannertitle,jdbcType=VARCHAR}, 
+      #{bannerimg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{isUse,jdbcType=INTEGER}, 
+      #{terminalType,jdbcType=INTEGER}, #{dr,jdbcType=INTEGER}, #{bannerurl,jdbcType=VARCHAR}, 
+      #{bannerno,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xdl.p2p.manger.system.entity.Banner">
+    insert into p2p_banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bannertype != null">
+        bannerType,
+      </if>
+      <if test="bannertitle != null">
+        bannerTitle,
+      </if>
+      <if test="bannerimg != null">
+        bannerimg,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isUse != null">
+        is_use,
+      </if>
+      <if test="terminalType != null">
+        terminal_type,
+      </if>
+      <if test="dr != null">
+        dr,
+      </if>
+      <if test="bannerurl != null">
+        bannerUrl,
+      </if>
+      <if test="bannerno != null">
+        bannerno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bannertype != null">
+        #{bannertype,jdbcType=BIGINT},
+      </if>
+      <if test="bannertitle != null">
+        #{bannertitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerimg != null">
+        #{bannerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUse != null">
+        #{isUse,jdbcType=INTEGER},
+      </if>
+      <if test="terminalType != null">
+        #{terminalType,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="bannerurl != null">
+        #{bannerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerno != null">
+        #{bannerno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xdl.p2p.manger.system.entity.BannerExample" resultType="java.lang.Long">
+    select count(*) from p2p_banner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update p2p_banner
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.bannertype != null">
+        bannerType = #{record.bannertype,jdbcType=BIGINT},
+      </if>
+      <if test="record.bannertitle != null">
+        bannerTitle = #{record.bannertitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerimg != null">
+        bannerimg = #{record.bannerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isUse != null">
+        is_use = #{record.isUse,jdbcType=INTEGER},
+      </if>
+      <if test="record.terminalType != null">
+        terminal_type = #{record.terminalType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dr != null">
+        dr = #{record.dr,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerurl != null">
+        bannerUrl = #{record.bannerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerno != null">
+        bannerno = #{record.bannerno,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update p2p_banner
+    set id = #{record.id,jdbcType=BIGINT},
+      bannerType = #{record.bannertype,jdbcType=BIGINT},
+      bannerTitle = #{record.bannertitle,jdbcType=VARCHAR},
+      bannerimg = #{record.bannerimg,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      is_use = #{record.isUse,jdbcType=INTEGER},
+      terminal_type = #{record.terminalType,jdbcType=INTEGER},
+      dr = #{record.dr,jdbcType=INTEGER},
+      bannerUrl = #{record.bannerurl,jdbcType=VARCHAR},
+      bannerno = #{record.bannerno,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xdl.p2p.manger.system.entity.Banner">
+    update p2p_banner
+    <set>
+      <if test="bannertype != null">
+        bannerType = #{bannertype,jdbcType=BIGINT},
+      </if>
+      <if test="bannertitle != null">
+        bannerTitle = #{bannertitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerimg != null">
+        bannerimg = #{bannerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUse != null">
+        is_use = #{isUse,jdbcType=INTEGER},
+      </if>
+      <if test="terminalType != null">
+        terminal_type = #{terminalType,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null">
+        dr = #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="bannerurl != null">
+        bannerUrl = #{bannerurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerno != null">
+        bannerno = #{bannerno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xdl.p2p.manger.system.entity.Banner">
+    update p2p_banner
+    set bannerType = #{bannertype,jdbcType=BIGINT},
+      bannerTitle = #{bannertitle,jdbcType=VARCHAR},
+      bannerimg = #{bannerimg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_use = #{isUse,jdbcType=INTEGER},
+      terminal_type = #{terminalType,jdbcType=INTEGER},
+      dr = #{dr,jdbcType=INTEGER},
+      bannerUrl = #{bannerurl,jdbcType=VARCHAR},
+      bannerno = #{bannerno,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.p2p.front.bmoney.service.BorrowmoneyMapper">
+  <resultMap id="BaseResultMap" type="com.xdl.p2p.front.bmoney.entity.Borrowmoney">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bserial" jdbcType="VARCHAR" property="bserial" />
+    <result column="buserid" jdbcType="VARCHAR" property="buserid" />
+    <result column="busername" jdbcType="VARCHAR" property="busername" />
+    <result column="bphone" jdbcType="VARCHAR" property="bphone" />
+    <result column="btype" jdbcType="VARCHAR" property="btype" />
+    <result column="btitle" jdbcType="VARCHAR" property="btitle" />
+    <result column="bmoney" jdbcType="VARCHAR" property="bmoney" />
+    <result column="brate" jdbcType="VARCHAR" property="brate" />
+    <result column="btimelimit" jdbcType="VARCHAR" property="btimelimit" />
+    <result column="blimit" jdbcType="VARCHAR" property="blimit" />
+    <result column="bstate" jdbcType="VARCHAR" property="bstate" />
+    <result column="brecommend" jdbcType="VARCHAR" property="brecommend" />
+    <result column="bleixing" jdbcType="VARCHAR" property="bleixing" />
+    <result column="note1" jdbcType="VARCHAR" property="note1" />
+    <result column="note2" jdbcType="VARCHAR" property="note2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bserial, buserid, busername, bphone, btype, btitle, bmoney, brate, btimelimit, 
+    blimit, bstate, brecommend, bleixing, note1, note2
+  </sql>
+  <select id="selectByExample" parameterType="com.xdl.p2p.front.bmoney.entity.BorrowmoneyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from p2p_borrowmoney
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p2p_borrowmoney
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p2p_borrowmoney
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xdl.p2p.front.bmoney.entity.BorrowmoneyExample">
+    delete from p2p_borrowmoney
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xdl.p2p.front.bmoney.entity.Borrowmoney">
+    insert into p2p_borrowmoney (id, bserial, buserid, 
+      busername, bphone, btype, 
+      btitle, bmoney, brate, 
+      btimelimit, blimit, bstate, 
+      brecommend, bleixing, note1, 
+      note2)
+    values (#{id,jdbcType=INTEGER}, #{bserial,jdbcType=VARCHAR}, #{buserid,jdbcType=VARCHAR}, 
+      #{busername,jdbcType=VARCHAR}, #{bphone,jdbcType=VARCHAR}, #{btype,jdbcType=VARCHAR}, 
+      #{btitle,jdbcType=VARCHAR}, #{bmoney,jdbcType=VARCHAR}, #{brate,jdbcType=VARCHAR}, 
+      #{btimelimit,jdbcType=VARCHAR}, #{blimit,jdbcType=VARCHAR}, #{bstate,jdbcType=VARCHAR}, 
+      #{brecommend,jdbcType=VARCHAR}, #{bleixing,jdbcType=VARCHAR}, #{note1,jdbcType=VARCHAR}, 
+      #{note2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xdl.p2p.front.bmoney.entity.Borrowmoney">
+    insert into p2p_borrowmoney
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bserial != null">
+        bserial,
+      </if>
+      <if test="buserid != null">
+        buserid,
+      </if>
+      <if test="busername != null">
+        busername,
+      </if>
+      <if test="bphone != null">
+        bphone,
+      </if>
+      <if test="btype != null">
+        btype,
+      </if>
+      <if test="btitle != null">
+        btitle,
+      </if>
+      <if test="bmoney != null">
+        bmoney,
+      </if>
+      <if test="brate != null">
+        brate,
+      </if>
+      <if test="btimelimit != null">
+        btimelimit,
+      </if>
+      <if test="blimit != null">
+        blimit,
+      </if>
+      <if test="bstate != null">
+        bstate,
+      </if>
+      <if test="brecommend != null">
+        brecommend,
+      </if>
+      <if test="bleixing != null">
+        bleixing,
+      </if>
+      <if test="note1 != null">
+        note1,
+      </if>
+      <if test="note2 != null">
+        note2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bserial != null">
+        #{bserial,jdbcType=VARCHAR},
+      </if>
+      <if test="buserid != null">
+        #{buserid,jdbcType=VARCHAR},
+      </if>
+      <if test="busername != null">
+        #{busername,jdbcType=VARCHAR},
+      </if>
+      <if test="bphone != null">
+        #{bphone,jdbcType=VARCHAR},
+      </if>
+      <if test="btype != null">
+        #{btype,jdbcType=VARCHAR},
+      </if>
+      <if test="btitle != null">
+        #{btitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bmoney != null">
+        #{bmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="brate != null">
+        #{brate,jdbcType=VARCHAR},
+      </if>
+      <if test="btimelimit != null">
+        #{btimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="blimit != null">
+        #{blimit,jdbcType=VARCHAR},
+      </if>
+      <if test="bstate != null">
+        #{bstate,jdbcType=VARCHAR},
+      </if>
+      <if test="brecommend != null">
+        #{brecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="bleixing != null">
+        #{bleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="note1 != null">
+        #{note1,jdbcType=VARCHAR},
+      </if>
+      <if test="note2 != null">
+        #{note2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xdl.p2p.front.bmoney.entity.BorrowmoneyExample" resultType="java.lang.Long">
+    select count(*) from p2p_borrowmoney
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update p2p_borrowmoney
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bserial != null">
+        bserial = #{record.bserial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buserid != null">
+        buserid = #{record.buserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busername != null">
+        busername = #{record.busername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bphone != null">
+        bphone = #{record.bphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btype != null">
+        btype = #{record.btype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btitle != null">
+        btitle = #{record.btitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bmoney != null">
+        bmoney = #{record.bmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brate != null">
+        brate = #{record.brate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btimelimit != null">
+        btimelimit = #{record.btimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blimit != null">
+        blimit = #{record.blimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bstate != null">
+        bstate = #{record.bstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brecommend != null">
+        brecommend = #{record.brecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bleixing != null">
+        bleixing = #{record.bleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note1 != null">
+        note1 = #{record.note1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note2 != null">
+        note2 = #{record.note2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update p2p_borrowmoney
+    set id = #{record.id,jdbcType=INTEGER},
+      bserial = #{record.bserial,jdbcType=VARCHAR},
+      buserid = #{record.buserid,jdbcType=VARCHAR},
+      busername = #{record.busername,jdbcType=VARCHAR},
+      bphone = #{record.bphone,jdbcType=VARCHAR},
+      btype = #{record.btype,jdbcType=VARCHAR},
+      btitle = #{record.btitle,jdbcType=VARCHAR},
+      bmoney = #{record.bmoney,jdbcType=VARCHAR},
+      brate = #{record.brate,jdbcType=VARCHAR},
+      btimelimit = #{record.btimelimit,jdbcType=VARCHAR},
+      blimit = #{record.blimit,jdbcType=VARCHAR},
+      bstate = #{record.bstate,jdbcType=VARCHAR},
+      brecommend = #{record.brecommend,jdbcType=VARCHAR},
+      bleixing = #{record.bleixing,jdbcType=VARCHAR},
+      note1 = #{record.note1,jdbcType=VARCHAR},
+      note2 = #{record.note2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xdl.p2p.front.bmoney.entity.Borrowmoney">
+    update p2p_borrowmoney
+    <set>
+      <if test="bserial != null">
+        bserial = #{bserial,jdbcType=VARCHAR},
+      </if>
+      <if test="buserid != null">
+        buserid = #{buserid,jdbcType=VARCHAR},
+      </if>
+      <if test="busername != null">
+        busername = #{busername,jdbcType=VARCHAR},
+      </if>
+      <if test="bphone != null">
+        bphone = #{bphone,jdbcType=VARCHAR},
+      </if>
+      <if test="btype != null">
+        btype = #{btype,jdbcType=VARCHAR},
+      </if>
+      <if test="btitle != null">
+        btitle = #{btitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bmoney != null">
+        bmoney = #{bmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="brate != null">
+        brate = #{brate,jdbcType=VARCHAR},
+      </if>
+      <if test="btimelimit != null">
+        btimelimit = #{btimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="blimit != null">
+        blimit = #{blimit,jdbcType=VARCHAR},
+      </if>
+      <if test="bstate != null">
+        bstate = #{bstate,jdbcType=VARCHAR},
+      </if>
+      <if test="brecommend != null">
+        brecommend = #{brecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="bleixing != null">
+        bleixing = #{bleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="note1 != null">
+        note1 = #{note1,jdbcType=VARCHAR},
+      </if>
+      <if test="note2 != null">
+        note2 = #{note2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xdl.p2p.front.bmoney.entity.Borrowmoney">
+    update p2p_borrowmoney
+    set bserial = #{bserial,jdbcType=VARCHAR},
+      buserid = #{buserid,jdbcType=VARCHAR},
+      busername = #{busername,jdbcType=VARCHAR},
+      bphone = #{bphone,jdbcType=VARCHAR},
+      btype = #{btype,jdbcType=VARCHAR},
+      btitle = #{btitle,jdbcType=VARCHAR},
+      bmoney = #{bmoney,jdbcType=VARCHAR},
+      brate = #{brate,jdbcType=VARCHAR},
+      btimelimit = #{btimelimit,jdbcType=VARCHAR},
+      blimit = #{blimit,jdbcType=VARCHAR},
+      bstate = #{bstate,jdbcType=VARCHAR},
+      brecommend = #{brecommend,jdbcType=VARCHAR},
+      bleixing = #{bleixing,jdbcType=VARCHAR},
+      note1 = #{note1,jdbcType=VARCHAR},
+      note2 = #{note2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getCountBmoney" resultType = "java.lang.Long" >
+  	 select count(*) from
+	(select count(*) from p2p_borrowmoney where  1=1 group by buserid ) a  
+  </select>
+  
+  
+  
+  
+  
+  
+</mapper>
